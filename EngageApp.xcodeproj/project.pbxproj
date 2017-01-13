@@ -19,6 +19,10 @@
 		E7A731D71E27D94F00B992DE /* SearchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A731D61E27D94F00B992DE /* SearchingViewController.swift */; };
 		E7A731D91E28577E00B992DE /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A731D81E28577E00B992DE /* SearchResultsViewController.swift */; };
 		E7A732191E28A35E00B992DE /* resultCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A732181E28A35D00B992DE /* resultCellTableViewCell.swift */; };
+		E7A7321E1E28BB2800B992DE /* VoicemailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7321A1E28BB2800B992DE /* VoicemailViewController.swift */; };
+		E7A7321F1E28BB2800B992DE /* ConfirmVoicemailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7321B1E28BB2800B992DE /* ConfirmVoicemailViewController.swift */; };
+		E7A732201E28BB2800B992DE /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7321C1E28BB2800B992DE /* SegueFromLeft.swift */; };
+		E7A732211E28BB2800B992DE /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7321D1E28BB2800B992DE /* SegueFromRight.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,10 @@
 		E7A731D61E27D94F00B992DE /* SearchingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingViewController.swift; sourceTree = "<group>"; };
 		E7A731D81E28577E00B992DE /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		E7A732181E28A35D00B992DE /* resultCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resultCellTableViewCell.swift; sourceTree = "<group>"; };
+		E7A7321A1E28BB2800B992DE /* VoicemailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoicemailViewController.swift; sourceTree = "<group>"; };
+		E7A7321B1E28BB2800B992DE /* ConfirmVoicemailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmVoicemailViewController.swift; sourceTree = "<group>"; };
+		E7A7321C1E28BB2800B992DE /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
+		E7A7321D1E28BB2800B992DE /* SegueFromRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +123,10 @@
 				E7A731D81E28577E00B992DE /* SearchResultsViewController.swift */,
 				E7A731D41E27D8BD00B992DE /* SearchViewController.swift */,
 				E7A732181E28A35D00B992DE /* resultCellTableViewCell.swift */,
+				E7A7321A1E28BB2800B992DE /* VoicemailViewController.swift */,
+				E7A7321B1E28BB2800B992DE /* ConfirmVoicemailViewController.swift */,
+				E7A7321C1E28BB2800B992DE /* SegueFromLeft.swift */,
+				E7A7321D1E28BB2800B992DE /* SegueFromRight.swift */,
 				E7A731391E2450FF00B992DE /* Assets.xcassets */,
 				E7A7313B1E2450FF00B992DE /* LaunchScreen.storyboard */,
 				E7A7313E1E2450FF00B992DE /* Info.plist */,
@@ -274,12 +286,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A7321E1E28BB2800B992DE /* VoicemailViewController.swift in Sources */,
 				E7A731D71E27D94F00B992DE /* SearchingViewController.swift in Sources */,
 				E7A731D91E28577E00B992DE /* SearchResultsViewController.swift in Sources */,
 				E7A732191E28A35E00B992DE /* resultCellTableViewCell.swift in Sources */,
+				E7A7321F1E28BB2800B992DE /* ConfirmVoicemailViewController.swift in Sources */,
 				E7A731D31E26DE9A00B992DE /* Candidate.swift in Sources */,
 				E7A731351E2450FF00B992DE /* ViewController.swift in Sources */,
 				E7A731D51E27D8BD00B992DE /* SearchViewController.swift in Sources */,
+				E7A732201E28BB2800B992DE /* SegueFromLeft.swift in Sources */,
+				E7A732211E28BB2800B992DE /* SegueFromRight.swift in Sources */,
 				E7A731331E2450FF00B992DE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

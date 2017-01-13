@@ -14,7 +14,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var companyField: UITextField!
     @IBAction func searchButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "searchButton", sender: <#T##Any?#>)
+      //  self.performSegue(withIdentifier: "searchButton", sender: <#T##Any?#>)
     }
 
     override func viewDidLoad() {
