@@ -10,16 +10,13 @@ import UIKit
 
 class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var candidate1 = Candidate(firstName: "John", lastName: "Smith", location: "Kansas", phoneNumber: "9789872222", position: "manager", company: "BOA")
-    var candidate2 = Candidate(firstName: "Irene", lastName: "Thof", location: "enwk", phoneNumber: "3289872222", position: "cashier", company: "BOA")
-    var candidate3 = Candidate(firstName: "Jinj", lastName: "Fith", location: "enwk", phoneNumber: "4359872222", position: "accountant", company: "BOA")
-    var candidate4 = Candidate(firstName: "Erin", lastName: "Thin", location: "enwk", phoneNumber: "8899872222", position: "assistant manager", company: "raytheon")
+    // to do, segue to record screen, and pass candidate object
     
-    var searchResults:[Candidate]?
+    var searchResults:[Candidate] = [Candidate]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchResults = [self.candidate1, self.candidate2, self.candidate3, self.candidate4]
+       
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -29,7 +26,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults!.count
+        return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -39,9 +36,9 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! resultCellTableViewCell
-        let candidate = searchResults![indexPath.row]
-        cell.name.text = candidate.firstName + " " + candidate.lastName
-        cell.position.text = candidate.position! + " at " + candidate.company!
+        let candidate = searchResults[indexPath.row]
+        cell.name.text = candidate.fullName
+        cell.position.text = candidate.position + " at " + candidate.company
         // cell.company.text = candidate.company!
         cell.location.text = candidate.location
         

@@ -13,8 +13,10 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var companyField: UITextField!
+    
     @IBAction func searchButton(_ sender: Any) {
-      //  self.performSegue(withIdentifier: "searchButton", sender: <#T##Any?#>)
+        // perform segue to searching screen, pass text fields
+        self.performSegue(withIdentifier: "search", sender: self)
     }
 
     override func viewDidLoad() {
@@ -28,7 +30,14 @@ class SearchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "search"){
+            var destinationViewController:SearchingViewController = segue.destination as! SearchingViewController
+            destinationViewController.queryName = nameField.text!
+            destinationViewController.queryLocation = locationField.text!
+            destinationViewController.queryCompany = companyField.text!
+        }
+    }
     /*
     // MARK: - Navigation
 

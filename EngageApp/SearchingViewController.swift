@@ -9,19 +9,25 @@
 import UIKit
 
 class SearchingViewController: UIViewController {
-    var candidate1 = Candidate(firstName: "John", lastName: "Smith", location: "Kansas", phoneNumber: "9789872222", position: "manager", company: "BOA")
-    var candidate2 = Candidate(firstName: "Irene", lastName: "Thof", location: "enwk", phoneNumber: "3289872222", position: "cashier", company: "BOA")
-    var candidate3 = Candidate(firstName: "Jinj", lastName: "Fith", location: "enwk", phoneNumber: "4359872222", position: "accountant", company: "BOA")
-    var candidate4 = Candidate(firstName: "Erin", lastName: "Thin", location: "enwk", phoneNumber: "8899872222", position: "assistant manager", company: "raytheon")
-    
-    var searchResults:[Candidate]?
 
+    var queryName = String()
+    var queryLocation = String()
+    var queryCompany = String()
+    var candidates = [Candidate]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchResults = [self.candidate1, self.candidate2, self.candidate3, self.candidate4]
-        // Do any additional setup after loading the view.
-        
-        // Do API call here
+        print(queryCompany)
+        // Do any additional setup after loading the view, typically from a nib.
+        let api = SearchAPI(queryName: queryName, queryLocation: queryLocation, queryCompany: nil)
+        api.getJSON(success: { candidates in
+            api.candidates = candidates
+            self.candidates = candidates
+            //set up results screen
+            //segue to results page, pass candidates array
+            self.performSegue(withIdentifier: "results", sender: self)
+            
+        })
         
     }
 
@@ -31,6 +37,12 @@ class SearchingViewController: UIViewController {
     }
     
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "results"){
+            var destinationViewController:SearchResultsViewController = segue.destination as! SearchResultsViewController
+            destinationViewController.searchResults = self.candidates
+        }
+    }
     /*
     // MARK: - Navigation
 

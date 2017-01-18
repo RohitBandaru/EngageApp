@@ -10,20 +10,18 @@ import Foundation
 import UIKit
 
 class Candidate {
-    var firstName: String
-    var lastName: String
+    var fullName: String
     var location: String
-    var phoneNumber: String?
-    var position: String?
-    var company: String?
+    var position: String
+    var company: String
+    var id: String
     
-    init(firstName: String, lastName: String, location: String, phoneNumber: String?, position: String, company: String){
-        self.firstName = firstName
-        self.lastName = lastName
+    init(fullName: String, location: String, position: String, company: String, id: String){
+        self.fullName = fullName
         self.location = location
-        self.phoneNumber = phoneNumber
         self.position = position
         self.company = company
+        self.id = id
     }
     
     

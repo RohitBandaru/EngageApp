@@ -12,7 +12,7 @@
         <!--Search-->
         <scene sceneID="TAN-qs-e8g">
             <objects>
-                <viewController title="Search" id="frd-4c-tDn" customClass="SearchViewController" customModule="EngageApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Search" id="frd-4c-tDn" customClass="SearchViewController" customModule="EngageApp" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JP0-IQ-f3x"/>
                         <viewControllerLayoutGuide type="bottom" id="bCN-FF-WSa"/>
@@ -76,7 +76,6 @@
                                 <state key="normal" image="Search button" backgroundImage="button"/>
                                 <connections>
                                     <action selector="searchButton:" destination="frd-4c-tDn" eventType="touchUpInside" id="Jd7-yh-ecb"/>
-                                    <segue destination="FyJ-zR-CGm" kind="show" identifier="searchButton" id="d8t-cx-rk9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -86,6 +85,7 @@
                         <outlet property="companyField" destination="6pY-z8-n0g" id="Ig1-v2-hB8"/>
                         <outlet property="locationField" destination="frR-pk-Uag" id="IzG-Rp-bfJ"/>
                         <outlet property="nameField" destination="wgD-Ah-gbx" id="H54-BD-ck9"/>
+                        <segue destination="FyJ-zR-CGm" kind="show" identifier="search" id="b6k-MC-2ZJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFl-R8-QwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -95,7 +95,7 @@
         <!--Searching-->
         <scene sceneID="NbC-py-t3q">
             <objects>
-                <viewController title="Searching" id="FyJ-zR-CGm" customClass="SearchingViewController" customModule="EngageApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Searching" id="FyJ-zR-CGm" customClass="SearchingViewController" customModule="EngageApp" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qAt-82-UgR"/>
                         <viewControllerLayoutGuide type="bottom" id="DFt-ma-jdY"/>
@@ -111,15 +111,11 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="J0m-RV-yHf">
-                                <rect key="frame" x="178" y="259" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="spinner" destination="J0m-RV-yHf" id="5eV-Ah-C5a"/>
+                        <segue destination="jWJ-hm-3iZ" kind="show" identifier="results" id="IXh-NH-dBV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Hb-9k-BzG" userLabel="First Responder" sceneMemberID="firstResponder"/>
