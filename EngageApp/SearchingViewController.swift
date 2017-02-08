@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class SearchingViewController: UIViewController {
-
+    
     var queryName = String()
     var queryLocation = String()
     var queryCompany = String()
@@ -17,40 +18,33 @@ class SearchingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(queryCompany)
         // Do any additional setup after loading the view, typically from a nib.
-        let api = SearchAPI(queryName: queryName, queryLocation: queryLocation, queryCompany: nil)
+        let api = SearchAPI(queryName: queryName, queryLocation: queryLocation, queryCompany: queryCompany)
         api.getJSON(success: { candidates in
             api.candidates = candidates
             self.candidates = candidates
-            //set up results screen
             //segue to results page, pass candidates array
             self.performSegue(withIdentifier: "results", sender: self)
-            
         })
         
+        let animationView: NVActivityIndicatorView = NVActivityIndicatorView(frame: self.view.frame)
+        self.view.addSubview(animationView)
+        
+        animationView.type = .ballSpinFadeLoader
+        animationView.padding = 100
+        animationView.color = UIColor( red: 29/255.0, green: 161/255.0, blue: 207/255.0, alpha: 1 )
+        animationView.startAnimating()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "results"){
-            var destinationViewController:SearchResultsViewController = segue.destination as! SearchResultsViewController
+            let destinationViewController:SearchResultsViewController = segue.destination as! SearchResultsViewController
             destinationViewController.searchResults = self.candidates
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

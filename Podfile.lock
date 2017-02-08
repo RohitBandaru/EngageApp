@@ -1,15 +1,18 @@
 PODS:
   - Alamofire (4.3.0)
+  - NVActivityIndicatorView (3.2)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire
+  - NVActivityIndicatorView
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  NVActivityIndicatorView: 28942c18ced111a6a3ce5e6f5b27d9d40116d639
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 4e04ea562133b998ef4eabf402ffc54f67df4976
+PODFILE CHECKSUM: 13e0f3cd75ad045505a491f54fe4dccd526a04f0
 
 COCOAPODS: 1.1.1

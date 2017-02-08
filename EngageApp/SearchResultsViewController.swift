@@ -10,15 +10,11 @@ import UIKit
 
 class SearchResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    // to do, segue to record screen, and pass candidate object
-    
     var searchResults:[Candidate] = [Candidate]()
+    var selectedCandidate:Candidate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -38,18 +34,58 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath) as! resultCellTableViewCell
         let candidate = searchResults[indexPath.row]
         cell.name.text = candidate.fullName
-        cell.position.text = candidate.position + " at " + candidate.company
-        // cell.company.text = candidate.company!
-        cell.location.text = candidate.location
+        
+        // display non null information
+        if(candidate.position != "" && candidate.company != ""){
+            cell.position.text = candidate.position + " at " + candidate.company
+        }
+        else if(candidate.company != ""){
+            cell.position.text = candidate.company
+        }
+        else if(candidate.position != ""){
+            cell.position.text = candidate.position
+        }
+        else{
+            cell.position.text = ""
+        }
+        
+        cell.location.text = (candidate.location != "null") ? candidate.location : ""
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedCandidate = searchResults[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.performSegue(withIdentifier: "segueToRecorder", sender: self)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // pass the candidate's info to the next view controller
+        if segue.identifier == "segueToRecorder" {
+            let destinationViewController = segue.destination as! VoicemailViewController
+            destinationViewController.candidate = selectedCandidate
+        }
+    }
     
+    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {
+        // N/A
+    }
+    
+    override func segueForUnwinding(to toViewController: UIViewController, from fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
+        if let id = identifier{
+            if id == "voicemailToSearchResults" {
+                let unwindSegue = SegueFromLeftUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
+                })
+                return unwindSegue
+            }
+        }
+        
+        return super.segueForUnwinding(to: toViewController, from: fromViewController, identifier: identifier)!
+    }
 }

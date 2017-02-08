@@ -8,6 +8,7 @@ use_frameworks!
 # Pods for EngageApp
 pod 'Alamofire'
 pod 'SwiftyJSON'
+pod 'NVActivityIndicatorView'
 
 target 'EngageAppTests' do
 inherit! :search_paths

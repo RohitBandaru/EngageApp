@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "019E68ED3B1363CE974BB77901DB8CC3B4A4E260",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C21B34F5735A246F827EB8F905221479008832F3" : 9223372036854775807,
+    "019E68ED3B1363CE974BB77901DB8CC3B4A4E260" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BF405DF6-8144-46AF-BA46-D58D17634320",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C21B34F5735A246F827EB8F905221479008832F3" : "EngageAppV1\/Pods\/",
+    "019E68ED3B1363CE974BB77901DB8CC3B4A4E260" : "EngageAppV1\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "EngageApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "EngageApp.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com\/grace-lam\/EngageAppV1",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "019E68ED3B1363CE974BB77901DB8CC3B4A4E260"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/grace-lam\/EngageAppV1.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C21B34F5735A246F827EB8F905221479008832F3"
+    }
+  ]
+}

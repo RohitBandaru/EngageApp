@@ -9,18 +9,46 @@
 import Foundation
 import UIKit
 import AVFoundation
+import AudioKit
+import Speech
 
 class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+    
+    var candidate: Candidate!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var positionLabel: UILabel!
+    @IBOutlet var companyLabel: UILabel!
     
     @IBOutlet var recordButton: UIButton!
     @IBOutlet var playButton: UIButton!
     @IBOutlet var doneButton: UIButton!
+    @IBOutlet var imageView: UIImageView!
     
     var audioRecorder:AVAudioRecorder!
     var audioPlayer:AVAudioPlayer!
+    var recordingName:String = ""
+    
+    // booleans for wave animation functionalities
+    var startedPlayback:Bool!
+    var replay:Bool!
+    
+    // init AudioKit for audio wave animation
+    var mic = AKMicrophone()
+    var playerWave:AKAudioPlayer!
+    var audioInputPlot: EZAudioPlot = EZAudioPlot()
+    var plot: AKNodeOutputPlot!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nameLabel.text = candidate.fullName
+        locationLabel.text = candidate.location
+        positionLabel.text = candidate.position
+        companyLabel.text = candidate.company
+        
+        startedPlayback = false
+        replay = false
         
         // disable play and done buttons on launch
         playButton.isEnabled = false
@@ -35,7 +63,7 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
         var currentDateTime = Date()
         var formatter = DateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
-        var recordingName = formatter.string(from: currentDateTime)+".wav"
+        recordingName = formatter.string(from: currentDateTime)+".wav"
         var pathArray = [dirPath, recordingName]
         let filePath = NSURL.fileURL(withPathComponents: pathArray)
         //print(filePath!)
@@ -45,13 +73,13 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
         do {
             try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
         } catch let error as NSError {
-            print(error.localizedDescription)
+            print("e " + error.localizedDescription)
         }
         
         do {
             try session.setActive(true)
         } catch let error as NSError {
-            print(error.localizedDescription)
+            print("f " + error.localizedDescription)
         }
         
         // initialize and prepare the recorder
@@ -63,7 +91,7 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
             
         } catch let error as NSError {
             audioRecorder = nil
-            print(error.localizedDescription)
+            print("g " + error.localizedDescription)
         }
         
         // initialize and prepare the player
@@ -73,11 +101,44 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
             audioPlayer.prepareToPlay()
         } catch let error as NSError {
             audioPlayer = nil
-            print(error.localizedDescription)
+            print("h " + error.localizedDescription)
         }
         
+        self.view.addSubview(audioInputPlot)
+        
+        do {
+            try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
+        } catch _ {
+        }
     }
     
+    
+    func setupRecordingPlot() {
+        if (plot != nil) {
+            plot.clear()
+            audioInputPlot.willRemoveSubview(plot)
+            plot.removeFromSuperview()
+        }
+        
+        mic = AKMicrophone()
+        let frm: CGRect = imageView.frame
+        let borders: CGRect = CGRect(x: frm.origin.x, y: frm.origin.y, width: frm.size.width, height: frm.size.height)
+        let tracker = AKAmplitudeTracker.init(mic)
+        let silence = AKBooster(tracker, gain: 0)
+        AudioKit.output = silence
+        audioInputPlot.bounds = borders
+        audioInputPlot.frame = borders
+        
+        mic.stop()
+        plot = AKNodeOutputPlot(mic, frame: borders)
+        plot.plotType = .rolling
+        plot.shouldFill = true
+        plot.shouldMirror = true
+        plot.color = UIColor.gray
+        plot.gain = 3 // adjust later
+        plot.backgroundColor = UIColor.white
+        audioInputPlot.addSubview(plot)
+    }
     
     @IBAction func recordStopButton(sender: UIButton) {
         
@@ -91,11 +152,40 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
     
     func recordAudio() {
         
+        switch AVAudioSession.sharedInstance().recordPermission() {
+            case AVAudioSessionRecordPermission.granted:
+                print("Permission granted")
+            
+            case AVAudioSessionRecordPermission.denied:
+                let alert = UIAlertController(title: "Microphone Access Denied", message: "This app requires microphone access to record the voicemail.", preferredStyle: .alert)
+                
+                let settingsAction = UIAlertAction(title: "Settings", style: .default) { (action:UIAlertAction!) in
+                    guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                        return
+                    }
+                    
+                    if UIApplication.shared.canOpenURL(settingsUrl) {
+                        UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                        })
+                    }
+                }
+                alert.addAction(settingsAction)
+                
+                self.present(alert, animated: true, completion:nil)
+                return
+            
+            default:
+                break
+        }
+        
         recordButton.setBackgroundImage(UIImage(named: "stop"), for: UIControlState.normal)
         
         // stop the audio player before recording
         if (audioPlayer.isPlaying) {
             audioPlayer.stop()
+            
+            playerWave.stop()
+            AudioKit.stop()
         }
         
         // start recording
@@ -107,6 +197,11 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
             playButton.alpha = 0.35
             doneButton.isEnabled = false
             doneButton.alpha = 0.25
+            
+            // animate audio wave
+            setupRecordingPlot()
+            AudioKit.start()
+            mic.start()
         }
     }
     
@@ -123,6 +218,12 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
             playButton.alpha = 1
             doneButton.isEnabled = true
             doneButton.alpha = 1
+            
+            // animate audio wave
+            AudioKit.stop()
+            mic.stop()
+            
+            startedPlayback = false
         }
         
         // update the player here, else play will always start from beginning
@@ -132,10 +233,39 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
             audioPlayer.prepareToPlay()
         } catch let error as NSError {
             audioPlayer = nil
-            print(error.localizedDescription)
+            print("a " + error.localizedDescription)
+        }
+        
+        do {
+            playerWave = try AKAudioPlayer(file: AKAudioFile(forReading: audioRecorder.url))
+            playerWave.looping = true
+        } catch let error as NSError {
+            playerWave = nil
+            print("b " + error.localizedDescription)
         }
     }
     
+    
+    func setupPlaybackPlot() {
+        plot.clear()
+        audioInputPlot.willRemoveSubview(plot)
+        plot.removeFromSuperview()
+        
+        let frm: CGRect = imageView.frame
+        let borders: CGRect = CGRect(x: frm.origin.x, y: frm.origin.y, width: frm.size.width, height: frm.size.height)
+        let tracker = AKAmplitudeTracker.init(playerWave)
+        let silence = AKBooster(tracker, gain: 0)
+        AudioKit.output = silence
+        
+        plot = AKNodeOutputPlot(playerWave, frame: borders)
+        plot.plotType = .rolling
+        plot.shouldFill = true
+        plot.shouldMirror = true
+        plot.color = UIColor.gray
+        plot.gain = 3 // adjust later
+        plot.backgroundColor = UIColor.white
+        audioInputPlot.addSubview(plot)
+    }
     
     @IBAction func playPauseButton(sender: UIButton) {
         
@@ -155,8 +285,27 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
         
         // play the recording
         if (!audioPlayer.isPlaying) {
+            
+            if (!startedPlayback) {
+                setupPlaybackPlot()
+                startedPlayback = true
+            }
+            
+            // animate audio wave
+            AudioKit.start()
+            if (replay == true) {
+                plot.clear()
+                playerWave.stop()
+                playerWave.startTime = 0.0
+                playerWave.play(from: 0.0)
+                //print(playerWave.startTime, playerWave.currentTime, playerWave.endTime)
+                replay = false
+            } else {
+                playerWave.start()
+            }
+            
             audioPlayer.play()
-            print("playing", audioPlayer.duration) // for testing purposes
+            //print("playing", playerWave.currentTime, audioPlayer.duration) // for testing purposes
         }
     }
     
@@ -165,6 +314,10 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
         playButton.setBackgroundImage(UIImage(named: "play"), for: UIControlState.normal)
         recordButton.isEnabled = true
         recordButton.alpha = 1
+        
+        // animate audio wave
+        playerWave.pause()
+        AudioKit.stop()
         
         // pause the replay
         if (audioPlayer.isPlaying) {
@@ -179,12 +332,16 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
         audioRecorder.stop()
         audioPlayer.stop()
         
+        AudioKit.stop()
+        playerWave.stop()
+        mic.stop()
+        
         // set audio session inactive
         var audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setActive(false)
         } catch let error as NSError {
-            print(error.localizedDescription)
+            print("c " + error.localizedDescription)
         }
         
         self.performSegue(withIdentifier: "doneSegue", sender: self)
@@ -194,8 +351,10 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
         
         // pass the recorded file to the next view controller
         if segue.identifier == "doneSegue" {
-            let secondViewController = segue.destination as! ConfirmVoicemailViewController
-            secondViewController.audioFile = audioRecorder.url as NSURL!
+            let destinationViewController = segue.destination as! ConfirmVoicemailViewController
+            destinationViewController.audioFile = audioRecorder.url as NSURL!
+            destinationViewController.candidate = candidate
+            destinationViewController.recordingName = self.recordingName
         }
     }
     
@@ -215,17 +374,18 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
             do {
                 try audioSession.setActive(true)
             } catch let error as NSError {
-                print(error.localizedDescription)
+                print("d " + error.localizedDescription)
             }
-        
+            
             audioRecorder.deleteRecording()
+            plot.clear()
         }
     }
     
     override func segueForUnwinding(to toViewController: UIViewController, from fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue {
         if let id = identifier{
             if id == "doneSegueUnwind" {
-                let unwindSegue = SegueFromLeft(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
+                let unwindSegue = SegueFromLeftUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
                     
                 })
                 return unwindSegue
@@ -236,6 +396,12 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
     }
     
     
+    @IBAction func backPushed(sender:UIButton) {
+        self.performSegue(withIdentifier: "voicemailToSearchResults", sender: self)
+        
+    }
+    
+    
     // handling audio interruptions when recording, flag will be false
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         
@@ -243,6 +409,7 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
         
         if !flag {
             audioRecorder.stop()
+            mic.stop()
             
             playButton.isEnabled = false
             playButton.alpha = 0.35
@@ -266,6 +433,7 @@ class VoicemailViewController: UIViewController, AVAudioRecorderDelegate, AVAudi
         // reset play button if finished playing successfully
         if flag {
             pauseAudio()
+            replay = true
         }
     }
 }

@@ -8,7 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		5BFAFA897511C2DC136AF425 /* Pods_EngageAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77CEA13724CEA23201B03637 /* Pods_EngageAppUITests.framework */; };
+		6504D4F41E318C2000FEE4F4 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504D4F31E318C2000FEE4F4 /* SegueFromLeft.swift */; };
+		6580352E1E303DB100B7BEAE /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6580352D1E303DB100B7BEAE /* AudioKit.framework */; };
+		6580352F1E303DB100B7BEAE /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6580352D1E303DB100B7BEAE /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6585853B1E44475F00918A53 /* EmailDraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6585853A1E44475F00918A53 /* EmailDraftViewController.swift */; };
+		65D2B3BC1E3FD77000D7C1C3 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2B3BB1E3FD77000D7C1C3 /* LogInViewController.swift */; };
+		65D2B3BE1E42812A00D7C1C3 /* BackupLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2B3BD1E42812A00D7C1C3 /* BackupLogin.swift */; };
 		65E64D567DE2FA0CDDA9C902 /* Pods_EngageApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8BFEA073A368128203B06F /* Pods_EngageApp.framework */; };
+		65F7D88A1E36C17600C4DAC4 /* EmailSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7D8891E36C17600C4DAC4 /* EmailSuccessViewController.swift */; };
 		7DFA80A162CE348300E94844 /* Pods_EngageAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7F7450D1700D7B1D38518A /* Pods_EngageAppTests.framework */; };
 		E7A731331E2450FF00B992DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A731321E2450FF00B992DE /* AppDelegate.swift */; };
 		E7A731381E2450FF00B992DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7A731361E2450FF00B992DE /* Main.storyboard */; };
@@ -23,7 +30,7 @@
 		E7A732191E28A35E00B992DE /* resultCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A732181E28A35D00B992DE /* resultCellTableViewCell.swift */; };
 		E7A7321E1E28BB2800B992DE /* VoicemailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7321A1E28BB2800B992DE /* VoicemailViewController.swift */; };
 		E7A7321F1E28BB2800B992DE /* ConfirmVoicemailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7321B1E28BB2800B992DE /* ConfirmVoicemailViewController.swift */; };
-		E7A732201E28BB2800B992DE /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7321C1E28BB2800B992DE /* SegueFromLeft.swift */; };
+		E7A732201E28BB2800B992DE /* SegueFromLeftUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7321C1E28BB2800B992DE /* SegueFromLeftUnwind.swift */; };
 		E7A732211E28BB2800B992DE /* SegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A7321D1E28BB2800B992DE /* SegueFromRight.swift */; };
 		E7A732231E29689D00B992DE /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A732221E29689D00B992DE /* SearchAPI.swift */; };
 /* End PBXBuildFile section */
@@ -45,10 +52,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		658035301E303DB100B7BEAE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6580352F1E303DB100B7BEAE /* AudioKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		086C9FD97E85CB16FA3C06F7 /* Pods-EngageAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EngageAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EngageAppUITests/Pods-EngageAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		51072885A44E5F2602BA0428 /* Pods-EngageApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EngageApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-EngageApp/Pods-EngageApp.release.xcconfig"; sourceTree = "<group>"; };
 		5AD63BC055CA63D0AC23D55B /* Pods-EngageAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EngageAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EngageAppTests/Pods-EngageAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		6504D4F31E318C2000FEE4F4 /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
+		6580352D1E303DB100B7BEAE /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = "AudioKit-iOS/AudioKit.framework"; sourceTree = "<group>"; };
+		6585853A1E44475F00918A53 /* EmailDraftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailDraftViewController.swift; sourceTree = "<group>"; };
+		65D2B3BB1E3FD77000D7C1C3 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		65D2B3BD1E42812A00D7C1C3 /* BackupLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupLogin.swift; sourceTree = "<group>"; };
+		65F7D8891E36C17600C4DAC4 /* EmailSuccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSuccessViewController.swift; sourceTree = "<group>"; };
 		77CEA13724CEA23201B03637 /* Pods_EngageAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EngageAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8BFEA073A368128203B06F /* Pods_EngageApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EngageApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4C9BDE2D0E62A6AAAD0D04A /* Pods-EngageAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EngageAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EngageAppTests/Pods-EngageAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -74,7 +101,7 @@
 		E7A732181E28A35D00B992DE /* resultCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resultCellTableViewCell.swift; sourceTree = "<group>"; };
 		E7A7321A1E28BB2800B992DE /* VoicemailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoicemailViewController.swift; sourceTree = "<group>"; };
 		E7A7321B1E28BB2800B992DE /* ConfirmVoicemailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmVoicemailViewController.swift; sourceTree = "<group>"; };
-		E7A7321C1E28BB2800B992DE /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
+		E7A7321C1E28BB2800B992DE /* SegueFromLeftUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeftUnwind.swift; sourceTree = "<group>"; };
 		E7A7321D1E28BB2800B992DE /* SegueFromRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromRight.swift; sourceTree = "<group>"; };
 		E7A732221E29689D00B992DE /* SearchAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6580352E1E303DB100B7BEAE /* AudioKit.framework in Frameworks */,
 				65E64D567DE2FA0CDDA9C902 /* Pods_EngageApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +161,7 @@
 		E7A731261E2450FE00B992DE = {
 			isa = PBXGroup;
 			children = (
+				6580352D1E303DB100B7BEAE /* AudioKit.framework */,
 				E7A731311E2450FF00B992DE /* EngageApp */,
 				E7A731461E2450FF00B992DE /* EngageAppTests */,
 				E7A731511E2450FF00B992DE /* EngageAppUITests */,
@@ -158,6 +187,7 @@
 				E7A731D21E26DE9A00B992DE /* Candidate.swift */,
 				E7A731321E2450FF00B992DE /* AppDelegate.swift */,
 				E7A731361E2450FF00B992DE /* Main.storyboard */,
+				65D2B3BB1E3FD77000D7C1C3 /* LogInViewController.swift */,
 				E7A732221E29689D00B992DE /* SearchAPI.swift */,
 				E7A731D41E27D8BD00B992DE /* SearchViewController.swift */,
 				E7A731D61E27D94F00B992DE /* SearchingViewController.swift */,
@@ -165,11 +195,15 @@
 				E7A732181E28A35D00B992DE /* resultCellTableViewCell.swift */,
 				E7A7321A1E28BB2800B992DE /* VoicemailViewController.swift */,
 				E7A7321B1E28BB2800B992DE /* ConfirmVoicemailViewController.swift */,
-				E7A7321C1E28BB2800B992DE /* SegueFromLeft.swift */,
+				6585853A1E44475F00918A53 /* EmailDraftViewController.swift */,
+				65F7D8891E36C17600C4DAC4 /* EmailSuccessViewController.swift */,
+				6504D4F31E318C2000FEE4F4 /* SegueFromLeft.swift */,
+				E7A7321C1E28BB2800B992DE /* SegueFromLeftUnwind.swift */,
 				E7A7321D1E28BB2800B992DE /* SegueFromRight.swift */,
 				E7A731391E2450FF00B992DE /* Assets.xcassets */,
 				E7A7313B1E2450FF00B992DE /* LaunchScreen.storyboard */,
 				E7A7313E1E2450FF00B992DE /* Info.plist */,
+				65D2B3BD1E42812A00D7C1C3 /* BackupLogin.swift */,
 			);
 			path = EngageApp;
 			sourceTree = "<group>";
@@ -205,6 +239,7 @@
 				E7A7312D1E2450FF00B992DE /* Resources */,
 				EF39DD649391DF0FC3168650 /* [CP] Embed Pods Frameworks */,
 				230B3AF6A215F1FBDA6A4326 /* [CP] Copy Pods Resources */,
+				658035301E303DB100B7BEAE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -269,6 +304,7 @@
 				TargetAttributes = {
 					E7A7312E1E2450FF00B992DE = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 76BQU526XH;
 						ProvisioningStyle = Automatic;
 					};
 					E7A731421E2450FF00B992DE = {
@@ -474,14 +510,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7A7321E1E28BB2800B992DE /* VoicemailViewController.swift in Sources */,
+				6585853B1E44475F00918A53 /* EmailDraftViewController.swift in Sources */,
+				65D2B3BE1E42812A00D7C1C3 /* BackupLogin.swift in Sources */,
 				E7A731D71E27D94F00B992DE /* SearchingViewController.swift in Sources */,
 				E7A732231E29689D00B992DE /* SearchAPI.swift in Sources */,
 				E7A731D91E28577E00B992DE /* SearchResultsViewController.swift in Sources */,
 				E7A732191E28A35E00B992DE /* resultCellTableViewCell.swift in Sources */,
+				65F7D88A1E36C17600C4DAC4 /* EmailSuccessViewController.swift in Sources */,
 				E7A7321F1E28BB2800B992DE /* ConfirmVoicemailViewController.swift in Sources */,
+				6504D4F41E318C2000FEE4F4 /* SegueFromLeft.swift in Sources */,
 				E7A731D31E26DE9A00B992DE /* Candidate.swift in Sources */,
 				E7A731D51E27D8BD00B992DE /* SearchViewController.swift in Sources */,
-				E7A732201E28BB2800B992DE /* SegueFromLeft.swift in Sources */,
+				65D2B3BC1E3FD77000D7C1C3 /* LogInViewController.swift in Sources */,
+				E7A732201E28BB2800B992DE /* SegueFromLeftUnwind.swift in Sources */,
 				E7A732211E28BB2800B992DE /* SegueFromRight.swift in Sources */,
 				E7A731331E2450FF00B992DE /* AppDelegate.swift in Sources */,
 			);
@@ -634,9 +675,14 @@
 			baseConfigurationReference = D91DD4A8A33D33A0E95AB6F6 /* Pods-EngageApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 76BQU526XH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AudioKit-iOS",
+				);
 				INFOPLIST_FILE = EngageApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.HunaMakia.EngageApp;
+				PRODUCT_BUNDLE_IDENTIFIER = EngageApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -647,9 +693,14 @@
 			baseConfigurationReference = 51072885A44E5F2602BA0428 /* Pods-EngageApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 76BQU526XH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AudioKit-iOS",
+				);
 				INFOPLIST_FILE = EngageApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.HunaMakia.EngageApp;
+				PRODUCT_BUNDLE_IDENTIFIER = EngageApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
